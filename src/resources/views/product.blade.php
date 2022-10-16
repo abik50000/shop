@@ -4,7 +4,8 @@
 
 @include('layouts.breadcrumbs', [
     'links' => [
-        '/test' => 'Старница'
+        $product->category ? $product->category->slug : '/' => $product->category ? $product->category->name : 'Without category',
+        $product->slug => $product->name
     ]
 ])
 
@@ -16,41 +17,41 @@
                 <div class="product-details-tab">
                     <div id="img-1" class="zoomWrapper single-zoom">
                         <a href="#">
-                            <img id="zoom1" src="assets/img/product/productbig4.jpg"
-                                data-zoom-image="assets/img/product/productbig4.jpg" alt="big-1">
+                            <img id="zoom1" src="/assets/img/product/product{{ ($product->id % 10 + 1) }}.jpg"
+                                data-zoom-image="/assets/img/product/product{{ ($product->id % 10 + 1) }}.jpg" alt="big-1">
                         </a>
                     </div>
                     <div class="single-zoom-thumb">
                         <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
                             <li>
                                 <a href="#" class="elevatezoom-gallery active" data-update=""
-                                    data-image="assets/img/product/productbig4.jpg"
-                                    data-zoom-image="assets/img/product/productbig4.jpg">
-                                    <img src="assets/img/product/productbig4.jpg" alt="zo-th-1" />
+                                    data-image="/assets/img/product/productbig4.jpg"
+                                    data-zoom-image="/assets/img/product/productbig4.jpg">
+                                    <img src="/assets/img/product/productbig4.jpg" alt="zo-th-1" />
                                 </a>
 
                             </li>
                             <li>
                                 <a href="#" class="elevatezoom-gallery active" data-update=""
-                                    data-image="assets/img/product/productbig1.jpg"
-                                    data-zoom-image="assets/img/product/productbig1.jpg">
-                                    <img src="assets/img/product/productbig1.jpg" alt="zo-th-1" />
+                                    data-image="/assets/img/product/productbig1.jpg"
+                                    data-zoom-image="/assets/img/product/productbig1.jpg">
+                                    <img src="/assets/img/product/productbig1.jpg" alt="zo-th-1" />
                                 </a>
 
                             </li>
                             <li>
                                 <a href="#" class="elevatezoom-gallery active" data-update=""
-                                    data-image="assets/img/product/productbig2.jpg"
-                                    data-zoom-image="assets/img/product/productbig2.jpg">
-                                    <img src="assets/img/product/productbig2.jpg" alt="zo-th-1" />
+                                    data-image="/assets/img/product/productbig2.jpg"
+                                    data-zoom-image="/assets/img/product/productbig2.jpg">
+                                    <img src="/assets/img/product/productbig2.jpg" alt="zo-th-1" />
                                 </a>
 
                             </li>
                             <li>
                                 <a href="#" class="elevatezoom-gallery active" data-update=""
-                                    data-image="assets/img/product/productbig3.jpg"
-                                    data-zoom-image="assets/img/product/productbig3.jpg">
-                                    <img src="assets/img/product/productbig3.jpg" alt="zo-th-1" />
+                                    data-image="/assets/img/product/productbig3.jpg"
+                                    data-zoom-image="/assets/img/product/productbig3.jpg">
+                                    <img src="/assets/img/product/productbig3.jpg" alt="zo-th-1" />
                                 </a>
 
                             </li>
@@ -62,7 +63,7 @@
                 <div class="product_d_right">
                     <form action="#">
 
-                        <h1><a href="#">commodo augue nisi</a></h1>
+                        <h1><a href="#">{{ $product->name }}</a></h1>
 
                         <div class=" product_ratting">
                             <ul>
@@ -76,35 +77,35 @@
 
                         </div>
                         <div class="price_box">
-                            <span class="current_price">$70.00</span>
-                            <span class="old_price">$80.00</span>
+                            <span class="current_price">${{ $product->price }}</span>
+                            <span class="old_price">${{ $product->price }}</span>
 
                         </div>
                         <div class="product_desc">
-                            <p>eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus
-                                eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non
-                                neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et
-                                placerat vestibulum, metus nisi posuere nisl, in </p>
-                        </div>
-                        <div class="product_variant color">
-                            <h3>Available Options</h3>
-                            <label>color</label>
-                            <ul>
-                                <li class="color1"><a href="#"></a></li>
-                                <li class="color2"><a href="#"></a></li>
-                                <li class="color3"><a href="#"></a></li>
-                                <li class="color4"><a href="#"></a></li>
-                            </ul>
+                            <div>{!! $product->description !!}</div>
                         </div>
                         <div class="product_variant quantity">
                             <label>quantity</label>
                             <input min="1" max="100" value="1" type="number">
                             <button class="button" type="submit">add to cart</button>
-
                         </div>
 
                         <div class="product_meta">
-                            <span>Category: <a href="#">Clothing</a></span>
+                            <span>Category:
+                                @if($product->category)
+
+                                    @if($product->category->parent)
+                                        <a href="{{ route('category', $product->category->parent->slug) }}">
+                                            {{ $product->category->parent->name }}
+                                        </a>
+                                    @endif
+
+                                    <a href="{{ route('category', $product->category->slug) }}">{{ $product->category->name }}</a>
+                                @else
+                                    <a href="{{ route('index') }}">Without category</a>
+                                @endif
+
+                            </span>
                         </div>
 
                     </form>

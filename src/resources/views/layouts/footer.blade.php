@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="widgets_container widget_app">
                         <div class="footer_logo">
-                            <a xhref="#"><img src="assets/img/logo/logo.png" alt=""></a>
+                            <a xhref="#"><img src="/assets/img/logo/logo.png" alt=""></a>
                         </div>
                         <div class="copyright_area">
                             <p class="copyright-text text-center">&copy; 2021 <a xhref="#">Lukani</a>. Made with <i

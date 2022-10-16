@@ -31,4 +31,11 @@ class Category extends Model
     {
         return $this->belongsTo(self::class, 'parent_id')->with('parent');
     }
+
+    public function scopeAccordion($query)
+    {
+        return $query->with('children')
+            ->whereNull('parent_id')
+            ->get();
+    }
 }

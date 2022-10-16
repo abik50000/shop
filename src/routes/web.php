@@ -18,9 +18,12 @@ use App\Http\Controllers\CartController;
 */
 
 Route::get('/', [AppController::class, 'shop'])->name('index');
+
+Route::get('/shop/{slug}', [AppController::class, 'category'])->name('category');
+
 Route::get('/contact', [AppController::class, 'contact'])->name('contact');
 
-Route::get('/product', [ProductController::class, 'product'])->name('product');
+Route::get('/product/{slug}', [ProductController::class, 'product'])->name('product');
 
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 

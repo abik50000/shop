@@ -105,7 +105,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-3 col-4">
                         <div class="logo">
-                            <a href="{{ route('index') }}"><img src="assets/img/logo/logo.png" alt=""></a>
+                            <a href="{{ route('index') }}"><img src="/assets/img/logo/logo.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-6 col-6">

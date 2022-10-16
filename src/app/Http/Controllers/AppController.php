@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\User;
-use App\Services\Slugify;
+use App\Models\Product;
+use App\Services\Shop;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -19,10 +19,25 @@ class AppController extends Controller
      */
     public function shop()
     {
-        $cat = Category::with('parent')->find(12);
+        return view('shop')->with([
+            'category'   => 'All categories',
+            'categories' => Category::accordion(),
+            'products'   => Product::with('category')->paginate(12)
+        ]);
+    }
 
-        dd($cat );
-        return view('shop');
+    /**
+     * Category page
+     */
+    public function category(Request $request, Shop $shop)
+    {
+        $category = Category::where('slug', $request->slug)->firstOrFail();
+
+        return view('shop')->with([
+            'category'   => $category->name,
+            'categories' => Category::accordion(),
+            'products'   => $shop->getProducts($category->id, 12)
+        ]);
     }
 
     /**
