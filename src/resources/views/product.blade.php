@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Contact us')
+@section('title', $product->name)
 @section('content')
 
 @include('layouts.breadcrumbs', [
